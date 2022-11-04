@@ -1,21 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.modal';
 @Component({
-  selector: 'app-shopping-list',
-  templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.css']
+    selector: 'app-shopping-list',
+    templateUrl: './shopping-list.component.html',
+    styleUrls: ['./shopping-list.component.css']
 })
 export class ShoppingListComponent implements OnInit {
-  
-  ingredients : Ingredient[] = [
-    new Ingredient("Apple" , 5),
-    new Ingredient("Banana" ,15),
-    new Ingredient("Pine Apple" , 3),
-  ];
 
-  constructor() { }
+    ingredients: Ingredient[] = [];
 
-  ngOnInit(): void {
-  }
+    constructor() { }
+
+    ngOnInit(): void {
+        if (localStorage.getItem("APP-INGREDENTS-LIST") !== null) {
+            let data = JSON.parse(localStorage.getItem("APP-INGREDENTS-LIST"));
+            data.forEach(element => {
+                this.ingredients.push(new Ingredient(element.id, element.itemName, element.itemAmount))
+            });
+
+        } else {
+            localStorage.setItem("APP-INGREDENTS-LIST", "")
+        }
+    }
 
 }
