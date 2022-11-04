@@ -6,5 +6,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'my-first-app';
+    serverName : string = "";
+    appServerStatus : boolean = false;
+    serverCreationStatus : string = "No Sever created at a time!";
+    constructor(){
+      setInterval(()=>{
+        this.appServerStatus = !this.appServerStatus
+      },5000)
+    }
+
+    onServerChange(){
+       this.serverCreationStatus = "Server was created!"
+    }
+
+    onServerUpdate(event : Event){
+       this.serverName = (<HTMLInputElement>event.target).value;
+    }
+
 }

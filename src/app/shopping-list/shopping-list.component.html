@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="col-10 mx-auto">
+        <app-shopping-edit></app-shopping-edit>
+        <hr/>
+        <p>The list</p>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-start align-items-center" *ngFor="let ingreds of ingredients">
+                {{ingreds.name}}
+                <span class="badge badge-primary badge-pill bg-info">{{ingreds.amount}}</span>
+            </li>
+        </ul>
+    </div>
+</div>
