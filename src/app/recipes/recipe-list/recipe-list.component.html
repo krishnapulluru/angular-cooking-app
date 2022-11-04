@@ -7,7 +7,7 @@
 </div>
 <div class="row my-2 py-2">
     <div class="col-12">
-        <ol class="list-group list-group-numbered">
+        <ol class="list-group list-group-numbered overflow-auto recipe-list">
             <app-recipe-item *ngFor="let recipeElm of recipes" [recipe]="recipeElm"></app-recipe-item>
         </ol>
     </div>
