@@ -1,0 +1,11 @@
+li {
+    cursor: pointer;
+}
+
+li img {
+    width: 100px;
+}
+
+li:hover{
+    background: #cdfdff;
+}
