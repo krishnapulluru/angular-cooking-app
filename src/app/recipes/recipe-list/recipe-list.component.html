@@ -8,14 +8,7 @@
 <div class="row my-2 py-2">
     <div class="col-12">
         <ol class="list-group list-group-numbered">
-            <li class="list-group-item d-flex justify-content-between align-item-start" *ngFor="let recipe of recipes">
-                <div class="ms-2 me-auto">
-                    <div class="fw-bold">{{recipe.name}}</div>
-                    {{recipe.description}}
-                </div>
-                <img [src]="recipe.imagePath" alt="{{recipe.name}}" class="img-fluid img-thumbnail" style="width:100px">
-            </li>
+            <app-recipe-item *ngFor="let recipeElm of recipes" [recipe]="recipeElm"></app-recipe-item>
         </ol>
-        <!-- <app-recipe-item></app-recipe-item> -->
     </div>
 </div>
