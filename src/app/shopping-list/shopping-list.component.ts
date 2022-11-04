@@ -11,13 +11,17 @@ export class ShoppingListComponent implements OnInit {
 
     constructor() { }
 
+    getNewIngredient(event: Ingredient) {
+        this.ingredients.push(event);
+        localStorage.setItem("APP-INGREDENTS-LIST", JSON.stringify(this.ingredients))
+    }
+
     ngOnInit(): void {
         if (localStorage.getItem("APP-INGREDENTS-LIST") !== null) {
-            let data = JSON.parse(localStorage.getItem("APP-INGREDENTS-LIST"));
-            data.forEach(element => {
-                this.ingredients.push(new Ingredient(element.id, element.itemName, element.itemAmount))
-            });
-
+            const data = JSON.parse(localStorage.getItem("APP-INGREDENTS-LIST"));
+            if (data.length > 0) {
+                this.ingredients = data
+            }
         } else {
             localStorage.setItem("APP-INGREDENTS-LIST", "")
         }
