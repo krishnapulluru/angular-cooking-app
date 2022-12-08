@@ -9,19 +9,19 @@
                     <div class="card-body">
                         <h5 class="card-title">{{recipe.name}}</h5>
                         <p class="card-text">{{recipe.description}}</p>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-start"  *ngFor="let ingredent of recipe.ingredients">
+                                <div class="ms-2 me-auto">
+                                  <div class="fw-bold">{{ingredent.name}}</div>
+                                </div>
+                                <span class="badge bg-primary rounded-pill">{{ingredent.amount}}</span>
+                              </li>
+                          </ul>
                     </div>
-                    <div class="card-footer bg-transparent">
-                        <div class="btn-group" role="group">
-                            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Actions
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                <a class="dropdown-item" href="#">To Shopping list</a>
-                                <a class="dropdown-item" href="#">Edit Recipe</a>
-                                <a class="dropdown-item" href="#">Delete Recipe</a>
-                            </div>
-                        </div>
+                    <div class="card-footer bg-transparent d-flex justify-content-around">
+                        <a class="btn btn-info" (click)="addToShoppningList()">To Shopping list</a>
+                        <a class="btn btn-secondary" href="#">Edit Recipe</a>
+                        <a class="btn btn-primary" href="#">Delete Recipe</a>
                     </div>
                 </div>
             </div>

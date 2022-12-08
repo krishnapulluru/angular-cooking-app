@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.modal';
+import { shoppingListService } from './shopping-list.service';
 @Component({
     selector: 'app-shopping-list',
     templateUrl: './shopping-list.component.html',
@@ -7,24 +8,15 @@ import { Ingredient } from '../shared/ingredient.modal';
 })
 export class ShoppingListComponent implements OnInit {
 
-    ingredients: Ingredient[] = [];
+    ingredients: Ingredient[];
 
-    constructor() { }
-
-    getNewIngredient(event: Ingredient) {
-        this.ingredients.push(event);
-        localStorage.setItem("APP-INGREDENTS-LIST", JSON.stringify(this.ingredients))
-    }
+    constructor(private shopServ : shoppingListService) { }
 
     ngOnInit(): void {
-        if (localStorage.getItem("APP-INGREDENTS-LIST") !== null) {
-            const data = JSON.parse(localStorage.getItem("APP-INGREDENTS-LIST"));
-            if (data.length > 0) {
-                this.ingredients = data
-            }
-        } else {
-            localStorage.setItem("APP-INGREDENTS-LIST", "")
-        }
+        this.ingredients = this.shopServ.getIngredents();
+        this.shopServ.ingredientChanged.subscribe((ing : Ingredient[])=>{
+            this.ingredients= ing;
+        })
     }
 
 }

@@ -1,16 +1,37 @@
-import { EventEmitter } from "@angular/core";
+import { EventEmitter, Injectable } from "@angular/core";
+import { Ingredient } from "../shared/ingredient.modal";
+import { shoppingListService } from "../shopping-list/shopping-list.service";
 import { Recipe } from "./recipies.modal";
 
+@Injectable()
 export class RecipeService {
 
+    constructor(private shpListServ : shoppingListService){}
     recipeSelected = new EventEmitter<Recipe>;
 
     recipes: Recipe[] = [
-        new Recipe("A Test Recipe", "Simply a test recipe test", "https://upload.wikimedia.org/wikipedia/commons/3/39/Recipe.jpg?20170213105318"),
-        new Recipe("A Test Recipe1", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book ", "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg")
+        new Recipe(
+            'Tasty Schnitzel',
+            'A super-tasty Schnitzel - just awesome!',
+            'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
+            [
+              new Ingredient(new Date().getTime().toString(16) , 'Meat', 1 , new Date().toDateString()),
+              new Ingredient(new Date().getTime().toString(16) ,'French Fries', 20 , new Date().toDateString())
+            ]),
+          new Recipe('Big Fat Burger',
+            'What else you need to say?',
+            'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
+            [
+              new Ingredient(new Date().getTime().toString(16) , 'Buns', 2 ,  new Date().toDateString()),
+              new Ingredient(new Date().getTime().toString(16) ,'Meat', 1 , new Date().toDateString())
+            ])
     ];
 
     getRecipes() {
         return this.recipes.slice()
+    }
+
+    addToShoppingListService(ingredents : Ingredient[]){
+        this.shpListServ.addIngredentsFromRecipe(ingredents);
     }
 }

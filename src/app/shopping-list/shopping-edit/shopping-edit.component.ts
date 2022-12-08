@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 
 import { Ingredient } from 'src/app/shared/ingredient.modal';
+import { shoppingListService } from '../shopping-list.service';
 
 @Component({
     selector: 'app-shopping-edit',
@@ -17,13 +18,12 @@ import { Ingredient } from 'src/app/shared/ingredient.modal';
 
 export class ShoppingEditComponent implements OnInit {
 
-    @Output() newIngredientAddEvent = new EventEmitter<Ingredient>();
     @ViewChild('itemName') itemNameRef: ElementRef;
     @ViewChild('itemAmount') itemAmountRef: ElementRef;
 
     private localData = [];
 
-    constructor() { }
+    constructor(private shopServ : shoppingListService) { }
 
     ngOnInit(): void {
     }
@@ -40,8 +40,7 @@ export class ShoppingEditComponent implements OnInit {
             this.itemAmountRef.nativeElement.focus();
         } else {
             const newIngredent = new Ingredient(new Date().getTime().toString(16), itemName, itemAmount, new Date().toDateString())
-            this.newIngredientAddEvent.emit(newIngredent);
-
+            this.shopServ.addIngredent(newIngredent);
             this.itemNameRef.nativeElement.value = "";
             this.itemAmountRef.nativeElement.value = "";
         }
